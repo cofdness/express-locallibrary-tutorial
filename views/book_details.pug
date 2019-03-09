@@ -1,0 +1,38 @@
+extends layout
+block content
+    h2  #{title}
+    h4(class='font-weight-bold') #{book.title}
+    a(href=book.author.url) Author: #{book.author.name}.
+    p
+      strong Summary: 
+      span #{book.summary}.
+    p
+        strong ISBN: 
+        span #{book.isbn}.
+    p
+        strong Genre: 
+        each val, index in book.genre
+            a(href=val.url) #{val.name}
+            if index < book.genre.length - 1
+                |, 
+            else
+                |. 
+    h4 Copies:
+    each bookInstance, index in bookInstances
+        a(href=bookInstance.url) #{bookInstance.imprint} 
+        if bookInstance.status == 'Available'
+            p.text-success #{bookInstance.status} 
+        else if bookInstance.status == 'Maintenance'
+            p.text-danger #{bookInstance.status} 
+        else
+            p.text-warning #{bookInstance.status} 
+        if bookInstance.status != 'Available'
+            p (Due: #{bookInstance.due_back.toLocaleString()})
+    else
+        | There is no copy available
+    hr
+    p
+        a(href=`${book.url}/delete`) Delete book
+    p
+        a(href=`${book.url}/update`) Update book
+ 

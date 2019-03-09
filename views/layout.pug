@@ -1,0 +1,40 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    - function exportDateFormat(date) {if(date) {date = new Date(date); let dd = date.getDate();let mm = date.getMonth() + 1; let yyyy = date.getFullYear(); if (dd < 10) {dd = '0' + dd;} if (mm < 10) {mm = '0' + mm;}  return `${yyyy}-${mm}-${dd}`} else return null}
+  body
+    div(class='container-fluid')
+      div(class='row')
+        div(class='col-sm-2')
+        div(class='col-sm-2')
+          block sidebar
+            ul(class='sidebar-nav')
+              li
+                a(href='/catalog') Home
+              li
+                a(href='/catalog/books') All books
+              li
+                a(href='/catalog/authors') All authors
+              li
+                a(href='/catalog/genres') All genres
+              li
+                a(href='/catalog/bookinstances') All book-instances
+              li
+                hr
+              li
+                a(href='/catalog/book/create') Create new book
+              li
+                a(href='/catalog/author/create') Create new author
+              li
+                a(href='/catalog/genre/create') Create new genre
+              li
+                a(href='/catalog/bookinstance/create') Create new book instance (copy)
+        div(class='col-sm-6')
+          block content
+        div(class='col-sm-2')

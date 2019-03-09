@@ -1,0 +1,24 @@
+extends layout
+block content
+    h1 #{title}
+    p
+        strong Title: 
+        a(href=bookInstance.book.url) #{bookInstance.book.title}
+    p
+        strong Imprint: 
+        | #{bookInstance.imprint}
+    p #[strong Status:] 
+        if bookInstance.status == 'Available'
+            span.text-success #{bookInstance.status}
+        else if bookInstance.status == 'Maintenance'
+            span.text-danger #{bookInstance.status}
+        else
+            span.text-warning #{bookInstance.status} 
+
+    if bookInstance.status != 'Available'
+        p #[strong Due back:] #{bookInstance.due_back.toDateString()}
+    hr
+    p Are you sure to delete this book copy?
+    form(method='POST', action='')
+        input#bookinstanceid.form-control(type='hidden', name='bookinstanceid', value=bookInstance._id, required='true')
+        button.btn.btn-primary(type='submit') Confirm
