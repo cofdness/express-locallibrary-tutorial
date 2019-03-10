@@ -14,7 +14,7 @@ var app = express();
 //setup mongoose connection
 
 let mongoose = require('mongoose')
-const mongoDB = 'mongodb://Phung:Phung1234@localhost:27017/local-library'
+const mongoDB = 'mongodb+srv://Phung:QYiFOORk8Q8qO09Y@cluster0-qjuj6.azure.mongodb.net/local-library?retryWrites=true'
 mongoose.connect(mongoDB, { useNewUrlParser: true })
 let db = mongoose.connection
 db.on('error', () => {console.log('MongoDB connection error:')})
