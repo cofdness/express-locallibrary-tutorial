@@ -4,7 +4,8 @@ let bookInstanceSchema = new Schema({
     book: {type: Schema.Types.ObjectId, ref: 'Book', required: true},
     imprint: {type: String, required: true},
     status: {type: String, required: true, enum: ['Available', 'Maintenance', 'Loaned', 'Reserved'], default: 'Maintenance'},
-    due_back: {type: Date, default: Date.now}
+    due_back: {type: Date, default: Date.now},
+    assign_to:{type: Schema.Types.ObjectId, ref: 'User'}
 })
 bookInstanceSchema.virtual('url')
     .get(function () {

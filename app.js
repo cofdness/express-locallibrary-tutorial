@@ -10,6 +10,8 @@ let catalogRouter = require('./routes/catalog')
 const compression = require('compression')
 const helmet = require('helmet')
 var app = express();
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 
 //setup mongoose connection
 
@@ -19,6 +21,22 @@ mongoose.connect(mongoDB, { useNewUrlParser: true })
 let db = mongoose.connection
 db.on('error', () => {console.log('MongoDB connection error:')})
 // view engine setup
+
+app.use(session({
+  secret: 'love music request',
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
+}))
+
+//make user ID available in templates
+app.use((req, res, next) => {
+  res.locals.currentUser = req.session.userId
+  next()
+})
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -31,7 +49,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use('/catalog', catalogRouter)
 
 // catch 404 and forward to error handler
