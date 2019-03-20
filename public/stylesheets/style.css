@@ -69,3 +69,50 @@ body {
 .avatar{
   max-width: 70px;
 }
+.expand-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.expand-menu ul {
+  list-style: none;
+}
+.expand-menu li a {
+  text-decoration: none;
+  display: inline-block;
+  /*background: #00a94e;*/
+  /*width: 100px;*/
+  color: black;
+}
+.expand-menu li a:hover {
+  background: darkgray;
+}
+.ul > li {
+  float: left;
+}
+.ul:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+/*.expand-menu ul {*/
+  /*position: absolute;*/
+  /*visibility: hidden;*/
+/*}*/
+
+ul li {
+  position: relative;
+}
+ul ul {
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+li.menu > ul {
+  position: absolute;
+  visibility: hidden;
+}
+li.menu:hover > ul {
+  visibility: visible;
+}
